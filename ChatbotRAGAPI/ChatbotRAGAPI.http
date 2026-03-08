@@ -1,0 +1,6 @@
+@ChatbotRAGAPI_HostAddress = http://localhost:5190
+
+GET {{ChatbotRAGAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

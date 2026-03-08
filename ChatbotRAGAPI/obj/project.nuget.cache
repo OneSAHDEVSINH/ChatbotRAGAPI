@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "dgSpecHash": "WIioOUhy9ys=",
+  "success": true,
+  "projectFilePath": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\ChatbotRAGAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\inspi\\.nuget\\packages\\documentformat.openxml\\3.0.2\\documentformat.openxml.3.0.2.nupkg.sha512",
+    "C:\\Users\\inspi\\.nuget\\packages\\documentformat.openxml.framework\\3.0.2\\documentformat.openxml.framework.3.0.2.nupkg.sha512",
+    "C:\\Users\\inspi\\.nuget\\packages\\htmlagilitypack\\1.11.72\\htmlagilitypack.1.11.72.nupkg.sha512",
+    "C:\\Users\\inspi\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.3\\microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "C:\\Users\\inspi\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\inspi\\.nuget\\packages\\npgsql\\9.0.3\\npgsql.9.0.3.nupkg.sha512",
+    "C:\\Users\\inspi\\.nuget\\packages\\system.io.packaging\\8.0.0\\system.io.packaging.8.0.0.nupkg.sha512",
+    "C:\\Users\\inspi\\.nuget\\packages\\uglytoad.pdfpig\\1.7.0-custom-5\\uglytoad.pdfpig.1.7.0-custom-5.nupkg.sha512",
+    "C:\\Users\\inspi\\.nuget\\packages\\uglytoad.pdfpig.core\\1.7.0-custom-5\\uglytoad.pdfpig.core.1.7.0-custom-5.nupkg.sha512",
+    "C:\\Users\\inspi\\.nuget\\packages\\uglytoad.pdfpig.fonts\\1.7.0-custom-5\\uglytoad.pdfpig.fonts.1.7.0-custom-5.nupkg.sha512",
+    "C:\\Users\\inspi\\.nuget\\packages\\uglytoad.pdfpig.tokenization\\1.7.0-custom-5\\uglytoad.pdfpig.tokenization.1.7.0-custom-5.nupkg.sha512",
+    "C:\\Users\\inspi\\.nuget\\packages\\uglytoad.pdfpig.tokens\\1.7.0-custom-5\\uglytoad.pdfpig.tokens.1.7.0-custom-5.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'System.IO.Packaging' 8.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-f32c-w444-8ppv",
+      "projectPath": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\ChatbotRAGAPI.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\ChatbotRAGAPI.csproj",
+      "libraryId": "System.IO.Packaging",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'System.IO.Packaging' 8.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-qj66-m88j-hmgj",
+      "projectPath": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\ChatbotRAGAPI.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\ChatbotRAGAPI.csproj",
+      "libraryId": "System.IO.Packaging",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}

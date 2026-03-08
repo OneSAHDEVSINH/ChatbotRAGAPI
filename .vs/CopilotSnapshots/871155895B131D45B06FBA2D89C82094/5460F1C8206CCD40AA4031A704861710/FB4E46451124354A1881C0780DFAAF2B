@@ -1,0 +1,103 @@
+﻿namespace ChatbotRAGAPI.Options;
+
+public sealed class RagOptions
+{
+    public const string SectionName = "Rag";
+
+    public int ChunkSize { get; set; } = 1200;
+
+    public int ChunkOverlap { get; set; } = 150;
+
+    public int MaxRetrievedChunks { get; set; } = 6;
+
+    public double MinimumScore { get; set; } = 0.18;
+
+    public double LexicalWeight { get; set; } = 0.35;
+
+    public double SemanticWeight { get; set; } = 0.65;
+
+    public bool UseConfiguredLlm { get; set; } = true;
+
+    public EmbeddingsOptions Embeddings { get; set; } = new();
+
+    public RerankerOptions Reranker { get; set; } = new();
+
+    public VectorStoreOptions VectorStore { get; set; } = new();
+
+    public LlmOptions Llm { get; set; } = new();
+}
+
+public sealed class EmbeddingsOptions
+{
+    public string? BaseUrl { get; set; }
+
+    public string EmbeddingsPath { get; set; } = "/v1/embeddings";
+
+    public string? Model { get; set; }
+
+    public string? ApiKey { get; set; }
+
+    public int Dimensions { get; set; } = 1024;
+
+    public bool IsConfigured =>
+        !string.IsNullOrWhiteSpace(BaseUrl) &&
+        !string.IsNullOrWhiteSpace(Model) &&
+        Dimensions > 0;
+}
+
+public sealed class VectorStoreOptions
+{
+    public string? BaseUrl { get; set; }
+
+    public string CollectionName { get; set; } = "chatbot_chunks";
+
+    public string Distance { get; set; } = "Cosine";
+
+    public string? ApiKey { get; set; }
+
+    public double MinimumScore { get; set; } = 0.3;
+
+    public bool IsConfigured =>
+        !string.IsNullOrWhiteSpace(BaseUrl) &&
+        !string.IsNullOrWhiteSpace(CollectionName);
+}
+
+public sealed class RerankerOptions
+{
+    public string? BaseUrl { get; set; }
+
+    public string RerankPath { get; set; } = "/rerank";
+
+    public string? Model { get; set; }
+
+    public string? ApiKey { get; set; }
+
+    public int CandidateCount { get; set; } = 12;
+
+    public int TopK { get; set; } = 6;
+
+    public double Weight { get; set; } = 0.75;
+
+    public bool IsConfigured =>
+        !string.IsNullOrWhiteSpace(BaseUrl) &&
+        !string.IsNullOrWhiteSpace(Model);
+}
+
+public sealed class LlmOptions
+{
+    public string? BaseUrl { get; set; }
+
+    public string ChatCompletionsPath { get; set; } = "/v1/chat/completions";
+
+    public string? Model { get; set; }
+
+    public string? ApiKey { get; set; }
+
+    public int MaxTokens { get; set; } = 400;
+
+    public double Temperature { get; set; } = 0.0;
+
+    public bool IsConfigured =>
+        !string.IsNullOrWhiteSpace(BaseUrl) &&
+        !string.IsNullOrWhiteSpace(Model);
+}

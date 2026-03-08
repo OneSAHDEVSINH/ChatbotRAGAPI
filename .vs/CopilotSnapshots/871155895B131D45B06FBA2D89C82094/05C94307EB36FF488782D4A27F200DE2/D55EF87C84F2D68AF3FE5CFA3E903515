@@ -1,0 +1,127 @@
+﻿using System.Text;
+using ChatbotRAGAPI.Contracts;
+using ChatbotRAGAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ChatbotRAGAPI.Controllers;
+
+[ApiController]
+[Route("api/ingestion")]
+public sealed class IngestionController : ControllerBase
+{
+    private static readonly HashSet<string> SupportedTextExtensions =
+    [
+        ".txt", ".md", ".json", ".csv", ".xml", ".yml", ".yaml", ".log", ".html", ".htm", ".cs", ".js", ".ts", ".sql"
+    ];
+
+    private readonly IIngestionService _ingestionService;
+    private readonly IWebPageContentService _webPageContentService;
+    private readonly IDocumentStore _documentStore;
+
+    public IngestionController(IIngestionService ingestionService, IWebPageContentService webPageContentService, IDocumentStore documentStore)
+    {
+        _ingestionService = ingestionService;
+        _webPageContentService = webPageContentService;
+        _documentStore = documentStore;
+    }
+
+    [HttpPost("documents/text")]
+    [ProducesResponseType<IngestionResponse>(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IngestionResponse>> IngestTextAsync([FromBody] IngestTextRequest request, CancellationToken cancellationToken)
+    {
+        var response = await _ingestionService.IngestTextAsync(
+            request.Content,
+            request.SourceName,
+            "text",
+            request.SourceId,
+            request.SourceLocation,
+            cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpPost("documents/files")]
+    [ProducesResponseType<IReadOnlyList<IngestionResponse>>(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IReadOnlyList<IngestionResponse>>> IngestFilesAsync([FromForm] IFormFileCollection files, CancellationToken cancellationToken)
+    {
+        if (files.Count == 0)
+        {
+            return BadRequest("At least one file is required.");
+        }
+
+        var results = new List<IngestionResponse>(files.Count);
+        foreach (var file in files)
+        {
+            var extension = Path.GetExtension(file.FileName);
+            if (!SupportedTextExtensions.Contains(extension))
+            {
+                return BadRequest($"Unsupported file type: {file.FileName}");
+            }
+
+            await using var stream = file.OpenReadStream();
+            using var reader = new StreamReader(stream, Encoding.UTF8, true);
+            var content = await reader.ReadToEndAsync(cancellationToken);
+
+            if (extension.Equals(".html", StringComparison.OrdinalIgnoreCase) || extension.Equals(".htm", StringComparison.OrdinalIgnoreCase))
+            {
+                content = StripHtml(content);
+            }
+
+            var response = await _ingestionService.IngestTextAsync(content, file.FileName, "file", null, file.FileName, cancellationToken);
+            results.Add(response);
+        }
+
+        return Ok(results);
+    }
+
+    [HttpPost("webpages")]
+    [ProducesResponseType<IngestionResponse>(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IngestionResponse>> IngestWebPageAsync([FromBody] IngestWebPageRequest request, CancellationToken cancellationToken)
+    {
+        var (title, content) = await _webPageContentService.FetchAsync(request.Url, cancellationToken);
+        var response = await _ingestionService.IngestTextAsync(
+            content,
+            request.SourceName ?? title,
+            "webpage",
+            request.SourceId,
+            request.Url,
+            cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpGet("documents")]
+    public async Task<ActionResult<object>> GetDocumentsAsync(CancellationToken cancellationToken)
+    {
+        var documents = await _documentStore.GetDocumentsAsync(cancellationToken);
+        return Ok(documents);
+    }
+
+    private static string StripHtml(string html)
+    {
+        var array = new char[html.Length];
+        var index = 0;
+        var insideTag = false;
+
+        foreach (var character in html)
+        {
+            switch (character)
+            {
+                case '<':
+                    insideTag = true;
+                    continue;
+                case '>':
+                    insideTag = false;
+                    continue;
+                default:
+                    if (!insideTag)
+                    {
+                        array[index++] = character;
+                    }
+                    break;
+            }
+        }
+
+        return new string(array, 0, index);
+    }
+}

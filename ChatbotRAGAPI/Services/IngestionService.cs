@@ -1,0 +1,110 @@
+using System.Diagnostics;
+using ChatbotRAGAPI.Contracts;
+using ChatbotRAGAPI.Domain;
+using ChatbotRAGAPI.Options;
+using ChatbotRAGAPI.Services.Interfaces;
+using Microsoft.Extensions.Options;
+
+namespace ChatbotRAGAPI.Services;
+
+public sealed class IngestionService : IIngestionService
+{
+    private readonly IDocumentStore _documentStore;
+    private readonly IEmbeddingClient _embeddingClient;
+    private readonly IAppTelemetry _appTelemetry;
+    private readonly ITextChunker _textChunker;
+    private readonly IVectorStore _vectorStore;
+    private readonly RagOptions _options;
+
+    public IngestionService(IDocumentStore documentStore, IEmbeddingClient embeddingClient, IAppTelemetry appTelemetry, ITextChunker textChunker, IVectorStore vectorStore, IOptions<RagOptions> options)
+    {
+        _documentStore = documentStore;
+        _embeddingClient = embeddingClient;
+        _appTelemetry = appTelemetry;
+        _textChunker = textChunker;
+        _vectorStore = vectorStore;
+        _options = options.Value;
+    }
+
+    public async Task<IngestionResponse> IngestTextAsync(string content, string sourceName, string sourceType, string? sourceId, string? sourceLocation, CancellationToken cancellationToken)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            throw new ArgumentException("Content is required.", nameof(content));
+        }
+
+        if (string.IsNullOrWhiteSpace(sourceName))
+        {
+            throw new ArgumentException("Source name is required.", nameof(sourceName));
+        }
+
+        var resolvedSourceId = string.IsNullOrWhiteSpace(sourceId)
+            ? GenerateSourceId(sourceName, sourceLocation)
+            : sourceId.Trim();
+
+        var documentId = $"doc_{Guid.NewGuid():N}";
+        var chunks = _textChunker.Chunk(content, _options.ChunkSize, _options.ChunkOverlap)
+            .Select((chunk, index) => new DocumentChunk
+            {
+                ChunkId = $"{documentId}_chunk_{index + 1}",
+                DocumentId = documentId,
+                SourceId = resolvedSourceId,
+                SourceName = sourceName.Trim(),
+                SourceLocation = sourceLocation,
+                Content = chunk
+            })
+            .ToArray();
+
+        var document = new StoredDocument
+        {
+            DocumentId = documentId,
+            SourceId = resolvedSourceId,
+            SourceName = sourceName.Trim(),
+            SourceType = sourceType,
+            SourceLocation = sourceLocation,
+            Content = content.Trim(),
+            IngestedAtUtc = DateTimeOffset.UtcNow
+        };
+
+        await _documentStore.UpsertAsync(document, chunks, cancellationToken);
+
+        if (_embeddingClient.IsConfigured && _vectorStore.IsConfigured && chunks.Length > 0)
+        {
+            var embeddings = await _embeddingClient.GenerateEmbeddingsAsync(chunks.Select(chunk => chunk.Content).ToArray(), cancellationToken);
+            if (embeddings.Count == chunks.Length && embeddings.All(embedding => embedding.Length > 0))
+            {
+                var vectorEntries = chunks
+                    .Zip(embeddings, static (chunk, embedding) => (Chunk: chunk, Embedding: embedding))
+                    .ToArray();
+
+                await _vectorStore.UpsertAsync(vectorEntries, cancellationToken);
+            }
+        }
+
+        var response = new IngestionResponse
+        {
+            DocumentId = documentId,
+            SourceId = resolvedSourceId,
+            SourceName = document.SourceName,
+            ChunkCount = chunks.Length,
+            IngestedAtUtc = document.IngestedAtUtc
+        };
+
+        _appTelemetry.TrackIngestion(stopwatch.Elapsed);
+        return response;
+    }
+
+    private static string GenerateSourceId(string sourceName, string? sourceLocation)
+    {
+        var basis = string.IsNullOrWhiteSpace(sourceLocation) ? sourceName : $"{sourceName}-{sourceLocation}";
+        var normalized = new string(basis
+            .Trim()
+            .ToLowerInvariant()
+            .Select(character => char.IsLetterOrDigit(character) ? character : '-')
+            .ToArray())
+            .Trim('-');
+
+        return string.IsNullOrWhiteSpace(normalized) ? $"source-{Guid.NewGuid():N}" : normalized;
+    }
+}

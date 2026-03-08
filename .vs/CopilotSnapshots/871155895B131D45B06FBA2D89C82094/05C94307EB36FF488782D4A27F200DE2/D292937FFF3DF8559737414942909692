@@ -1,0 +1,25 @@
+﻿using ChatbotRAGAPI.Contracts;
+using ChatbotRAGAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ChatbotRAGAPI.Controllers;
+
+[ApiController]
+[Route("api/chat")]
+public sealed class ChatController : ControllerBase
+{
+    private readonly IChatService _chatService;
+
+    public ChatController(IChatService chatService)
+    {
+        _chatService = chatService;
+    }
+
+    [HttpPost("ask")]
+    [ProducesResponseType<AskQuestionResponse>(StatusCodes.Status200OK)]
+    public async Task<ActionResult<AskQuestionResponse>> AskAsync([FromBody] AskQuestionRequest request, CancellationToken cancellationToken)
+    {
+        var response = await _chatService.AskAsync(request, cancellationToken);
+        return Ok(response);
+    }
+}

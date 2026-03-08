@@ -1,0 +1,230 @@
+using ChatbotRAGAPI.Contracts;
+using ChatbotRAGAPI.Domain;
+using ChatbotRAGAPI.Options;
+using ChatbotRAGAPI.Services.Interfaces;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ChatbotRAGAPI.Controllers;
+
+[ApiController]
+[Route("api/ingestion")]
+public sealed class IngestionController : ControllerBase
+{
+    private readonly BackgroundIngestionOptions _backgroundIngestionOptions;
+    private readonly IIngestionService _ingestionService;
+    private readonly IIngestionJobQueue _ingestionJobQueue;
+    private readonly ISourceAccessService _sourceAccessService;
+    private readonly IUploadedDocumentTextExtractor _uploadedDocumentTextExtractor;
+    private readonly IWebPageContentService _webPageContentService;
+    private readonly IDocumentStore _documentStore;
+
+    public IngestionController(IIngestionService ingestionService, IIngestionJobQueue ingestionJobQueue, ISourceAccessService sourceAccessService, IUploadedDocumentTextExtractor uploadedDocumentTextExtractor, IWebPageContentService webPageContentService, IDocumentStore documentStore, IOptions<RagOptions> options)
+    {
+        _backgroundIngestionOptions = options.Value.BackgroundIngestion;
+        _ingestionService = ingestionService;
+        _ingestionJobQueue = ingestionJobQueue;
+        _sourceAccessService = sourceAccessService;
+        _uploadedDocumentTextExtractor = uploadedDocumentTextExtractor;
+        _webPageContentService = webPageContentService;
+        _documentStore = documentStore;
+    }
+
+    [HttpPost("documents/text")]
+    [ProducesResponseType<IngestionResponse>(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IngestionResponse>> IngestTextAsync([FromBody] IngestTextRequest request, CancellationToken cancellationToken)
+    {
+        if (!_sourceAccessService.CanAccessSource(request.SourceId, requireExplicitSourceForRestrictedWrites: true))
+        {
+            return Forbid();
+        }
+
+        var response = await _ingestionService.IngestTextAsync(
+            request.Content,
+            request.SourceName,
+            "text",
+            request.SourceId,
+            request.SourceLocation,
+            cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpPost("jobs/text")]
+    [ProducesResponseType<IngestionJobAcceptedResponse>(StatusCodes.Status202Accepted)]
+    public async Task<ActionResult<IngestionJobAcceptedResponse>> EnqueueTextIngestionAsync([FromBody] IngestTextRequest request, CancellationToken cancellationToken)
+    {
+        if (!_sourceAccessService.CanAccessSource(request.SourceId, requireExplicitSourceForRestrictedWrites: true))
+        {
+            return Forbid();
+        }
+
+        var accepted = await _ingestionJobQueue.EnqueueAsync(new BackgroundIngestionJob
+        {
+            Kind = IngestionJobKind.Text,
+            SourceType = "text",
+            Content = request.Content,
+            SourceName = request.SourceName,
+            SourceId = request.SourceId,
+            SourceLocation = request.SourceLocation
+        }, cancellationToken);
+
+        return AcceptedAtAction(nameof(GetIngestionJobStatusAsync), new { jobId = accepted.JobId }, accepted);
+    }
+
+    [HttpPost("documents/files")]
+    [ProducesResponseType<IReadOnlyList<IngestionResponse>>(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IReadOnlyList<IngestionResponse>>> IngestFilesAsync([FromForm] IFormFileCollection files, [FromForm] string? sourceId, CancellationToken cancellationToken)
+    {
+        if (!_sourceAccessService.CanAccessSource(sourceId, requireExplicitSourceForRestrictedWrites: true))
+        {
+            return Forbid();
+        }
+
+        if (files.Count == 0)
+        {
+            return BadRequest("At least one file is required.");
+        }
+
+        var results = new List<IngestionResponse>(files.Count);
+        foreach (var file in files)
+        {
+            if (!_uploadedDocumentTextExtractor.CanExtract(file.FileName))
+            {
+                return BadRequest($"Unsupported file type: {file.FileName}");
+            }
+
+            var content = await _uploadedDocumentTextExtractor.ExtractAsync(file, cancellationToken);
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                return BadRequest($"No readable content could be extracted from: {file.FileName}");
+            }
+
+            var response = await _ingestionService.IngestTextAsync(content, file.FileName, "file", sourceId, file.FileName, cancellationToken);
+            results.Add(response);
+        }
+
+        return Ok(results);
+    }
+
+    [HttpPost("jobs/files")]
+    [ProducesResponseType<IngestionJobAcceptedResponse>(StatusCodes.Status202Accepted)]
+    public async Task<ActionResult<IngestionJobAcceptedResponse>> EnqueueFileIngestionAsync([FromForm] IFormFileCollection files, [FromForm] string? sourceId, CancellationToken cancellationToken)
+    {
+        if (!_sourceAccessService.CanAccessSource(sourceId, requireExplicitSourceForRestrictedWrites: true))
+        {
+            return Forbid();
+        }
+
+        if (files.Count == 0)
+        {
+            return BadRequest("At least one file is required.");
+        }
+
+        if (files.Count > _backgroundIngestionOptions.MaxFilesPerJob)
+        {
+            return BadRequest($"A maximum of {_backgroundIngestionOptions.MaxFilesPerJob} files can be queued in one job.");
+        }
+
+        var totalBytes = files.Sum(file => file.Length);
+        if (totalBytes > _backgroundIngestionOptions.MaxBufferedFileBytes)
+        {
+            return BadRequest($"Queued file payload exceeds the configured limit of {_backgroundIngestionOptions.MaxBufferedFileBytes} bytes.");
+        }
+
+        var bufferedFiles = new List<QueuedFileUpload>(files.Count);
+        foreach (var file in files)
+        {
+            if (!_uploadedDocumentTextExtractor.CanExtract(file.FileName))
+            {
+                return BadRequest($"Unsupported file type: {file.FileName}");
+            }
+
+            await using var stream = file.OpenReadStream();
+            using var memoryStream = new MemoryStream(capacity: (int)Math.Min(file.Length, int.MaxValue));
+            await stream.CopyToAsync(memoryStream, cancellationToken);
+
+            bufferedFiles.Add(new QueuedFileUpload
+            {
+                FileName = file.FileName,
+                ContentType = file.ContentType,
+                Content = memoryStream.ToArray()
+            });
+        }
+
+        var accepted = await _ingestionJobQueue.EnqueueAsync(new BackgroundIngestionJob
+        {
+            Kind = IngestionJobKind.Files,
+            SourceType = "file",
+            SourceId = sourceId,
+            Files = bufferedFiles
+        }, cancellationToken);
+
+        return AcceptedAtAction(nameof(GetIngestionJobStatusAsync), routeValues: new { jobId = accepted.JobId }, value: accepted);
+    }
+
+    [HttpPost("webpages")]
+    [ProducesResponseType<IngestionResponse>(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IngestionResponse>> IngestWebPageAsync([FromBody] IngestWebPageRequest request, CancellationToken cancellationToken)
+    {
+        if (!_sourceAccessService.CanAccessSource(request.SourceId, requireExplicitSourceForRestrictedWrites: true))
+        {
+            return Forbid();
+        }
+
+        var (title, content) = await _webPageContentService.FetchAsync(request.Url, cancellationToken);
+        var response = await _ingestionService.IngestTextAsync(
+            content,
+            request.SourceName ?? title,
+            "webpage",
+            request.SourceId,
+            request.Url,
+            cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpPost("jobs/webpages")]
+    [ProducesResponseType<IngestionJobAcceptedResponse>(StatusCodes.Status202Accepted)]
+    public async Task<ActionResult<IngestionJobAcceptedResponse>> EnqueueWebPageIngestionAsync([FromBody] IngestWebPageRequest request, CancellationToken cancellationToken)
+    {
+        if (!_sourceAccessService.CanAccessSource(request.SourceId, requireExplicitSourceForRestrictedWrites: true))
+        {
+            return Forbid();
+        }
+
+        var accepted = await _ingestionJobQueue.EnqueueAsync(new BackgroundIngestionJob
+        {
+            Kind = IngestionJobKind.WebPage,
+            SourceType = "webpage",
+            SourceName = request.SourceName,
+            SourceId = request.SourceId,
+            SourceLocation = request.Url,
+            Url = request.Url
+        }, cancellationToken);
+
+        return AcceptedAtAction(nameof(GetIngestionJobStatusAsync), new { jobId = accepted.JobId }, accepted);
+    }
+
+    [HttpGet("documents")]
+    public async Task<ActionResult<object>> GetDocumentsAsync(CancellationToken cancellationToken)
+    {
+        var allowedSources = _sourceAccessService.GetAllowedSources();
+        var documents = await _documentStore.GetDocumentsAsync(cancellationToken);
+        if (allowedSources is not null)
+        {
+            documents = documents.Where(document => allowedSources.Contains(document.SourceId)).ToArray();
+        }
+
+        return Ok(documents);
+    }
+
+    [HttpGet("jobs/{jobId}")]
+    [ProducesResponseType<IngestionJobStatusResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IngestionJobStatusResponse>> GetIngestionJobStatusAsync(string jobId, CancellationToken cancellationToken)
+    {
+        var status = await _ingestionJobQueue.GetStatusAsync(jobId, cancellationToken);
+        return status is null ? NotFound() : Ok(status);
+    }
+}

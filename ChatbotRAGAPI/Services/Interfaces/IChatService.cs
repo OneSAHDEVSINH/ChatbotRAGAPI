@@ -1,0 +1,10 @@
+using ChatbotRAGAPI.Contracts;
+
+namespace ChatbotRAGAPI.Services.Interfaces;
+
+public interface IChatService
+{
+    Task<AskQuestionResponse> AskAsync(AskQuestionRequest request, CancellationToken cancellationToken);
+
+    IAsyncEnumerable<ChatStreamEvent> StreamAsync(AskQuestionRequest request, CancellationToken cancellationToken);
+}

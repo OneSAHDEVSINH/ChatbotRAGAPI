@@ -1,0 +1,64 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "Rag": {
+    "ChunkSize": 1200,
+    "ChunkOverlap": 150,
+    "MaxRetrievedChunks": 6,
+    "MinimumScore": 0.18,
+    "LexicalWeight": 0.35,
+    "SemanticWeight": 0.65,
+    "UseConfiguredLlm": false,
+    "Embeddings": {
+      "BaseUrl": "http://localhost:8001",
+      "EmbeddingsPath": "/v1/embeddings",
+      "Model": "BAAI/bge-m3",
+      "ApiKey": null,
+      "Dimensions": 1024
+    },
+    "Ocr": {
+      "Enabled": false,
+      "ExecutablePath": "tesseract",
+      "Language": "eng",
+      "PageSegmentationMode": 3,
+      "TimeoutSeconds": 120,
+      "DataPath": null,
+      "TempDirectory": null
+    },
+    "Reranker": {
+      "BaseUrl": "http://localhost:7997",
+      "RerankPath": "/rerank",
+      "Model": "BAAI/bge-reranker-v2-m3",
+      "ApiKey": null,
+      "CandidateCount": 12,
+      "TopK": 6,
+      "Weight": 0.75
+    },
+    "VectorStore": {
+      "BaseUrl": "http://localhost:6333",
+      "CollectionName": "chatbot_chunks",
+      "Distance": "Cosine",
+      "ApiKey": null,
+      "MinimumScore": 0.3
+    },
+    "Postgres": {
+      "ConnectionString": null,
+      "Schema": "public",
+      "DocumentsTableName": "rag_documents",
+      "ChunksTableName": "rag_chunks"
+    },
+    "Llm": {
+      "BaseUrl": "http://localhost:8000",
+      "ChatCompletionsPath": "/v1/chat/completions",
+      "Model": "Qwen/Qwen2.5-7B-Instruct",
+      "ApiKey": null,
+      "MaxTokens": 400,
+      "Temperature": 0.0
+    }
+  }
+}

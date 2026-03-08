@@ -1,0 +1,91 @@
+﻿using ChatbotRAGAPI.Contracts;
+using ChatbotRAGAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ChatbotRAGAPI.Controllers;
+
+[ApiController]
+[Route("api/ingestion")]
+public sealed class IngestionController : ControllerBase
+{
+    private readonly IIngestionService _ingestionService;
+    private readonly IUploadedDocumentTextExtractor _uploadedDocumentTextExtractor;
+    private readonly IWebPageContentService _webPageContentService;
+    private readonly IDocumentStore _documentStore;
+
+    public IngestionController(IIngestionService ingestionService, IUploadedDocumentTextExtractor uploadedDocumentTextExtractor, IWebPageContentService webPageContentService, IDocumentStore documentStore)
+    {
+        _ingestionService = ingestionService;
+        _uploadedDocumentTextExtractor = uploadedDocumentTextExtractor;
+        _webPageContentService = webPageContentService;
+        _documentStore = documentStore;
+    }
+
+    [HttpPost("documents/text")]
+    [ProducesResponseType<IngestionResponse>(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IngestionResponse>> IngestTextAsync([FromBody] IngestTextRequest request, CancellationToken cancellationToken)
+    {
+        var response = await _ingestionService.IngestTextAsync(
+            request.Content,
+            request.SourceName,
+            "text",
+            request.SourceId,
+            request.SourceLocation,
+            cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpPost("documents/files")]
+    [ProducesResponseType<IReadOnlyList<IngestionResponse>>(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IReadOnlyList<IngestionResponse>>> IngestFilesAsync([FromForm] IFormFileCollection files, CancellationToken cancellationToken)
+    {
+        if (files.Count == 0)
+        {
+            return BadRequest("At least one file is required.");
+        }
+
+        var results = new List<IngestionResponse>(files.Count);
+        foreach (var file in files)
+        {
+            if (!_uploadedDocumentTextExtractor.CanExtract(file.FileName))
+            {
+                return BadRequest($"Unsupported file type: {file.FileName}");
+            }
+
+            var content = await _uploadedDocumentTextExtractor.ExtractAsync(file, cancellationToken);
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                return BadRequest($"No readable content could be extracted from: {file.FileName}");
+            }
+
+            var response = await _ingestionService.IngestTextAsync(content, file.FileName, "file", null, file.FileName, cancellationToken);
+            results.Add(response);
+        }
+
+        return Ok(results);
+    }
+
+    [HttpPost("webpages")]
+    [ProducesResponseType<IngestionResponse>(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IngestionResponse>> IngestWebPageAsync([FromBody] IngestWebPageRequest request, CancellationToken cancellationToken)
+    {
+        var (title, content) = await _webPageContentService.FetchAsync(request.Url, cancellationToken);
+        var response = await _ingestionService.IngestTextAsync(
+            content,
+            request.SourceName ?? title,
+            "webpage",
+            request.SourceId,
+            request.Url,
+            cancellationToken);
+
+        return Ok(response);
+    }
+
+    [HttpGet("documents")]
+    public async Task<ActionResult<object>> GetDocumentsAsync(CancellationToken cancellationToken)
+    {
+        var documents = await _documentStore.GetDocumentsAsync(cancellationToken);
+        return Ok(documents);
+    }
+}

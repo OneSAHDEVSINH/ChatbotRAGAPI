@@ -1,0 +1,180 @@
+using System.Diagnostics;
+using System.Text.RegularExpressions;
+using ChatbotRAGAPI.Domain;
+using ChatbotRAGAPI.Options;
+using ChatbotRAGAPI.Services.Interfaces;
+using Microsoft.Extensions.Options;
+
+namespace ChatbotRAGAPI.Services;
+
+public sealed class RetrievalService : IRetrievalService
+{
+    private static readonly Regex TokenRegex = new(@"\p{L}[\p{L}\p{Nd}_-]*", RegexOptions.Compiled);
+
+    private readonly IDocumentStore _documentStore;
+    private readonly IAppTelemetry _appTelemetry;
+    private readonly IEmbeddingClient _embeddingClient;
+    private readonly RagOptions _options;
+    private readonly IReranker _reranker;
+    private readonly ISourceAccessService _sourceAccessService;
+    private readonly IVectorStore _vectorStore;
+
+    public RetrievalService(IDocumentStore documentStore, IAppTelemetry appTelemetry, IEmbeddingClient embeddingClient, IReranker reranker, ISourceAccessService sourceAccessService, IVectorStore vectorStore, IOptions<RagOptions> options)
+    {
+        _documentStore = documentStore;
+        _appTelemetry = appTelemetry;
+        _embeddingClient = embeddingClient;
+        _options = options.Value;
+        _reranker = reranker;
+        _sourceAccessService = sourceAccessService;
+        _vectorStore = vectorStore;
+    }
+
+    public async Task<IReadOnlyList<RetrievedChunk>> RetrieveAsync(string question, string? sourceId, CancellationToken cancellationToken)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        ArgumentException.ThrowIfNullOrWhiteSpace(question);
+
+        var lexicalResults = await RetrieveLexicalAsync(question, sourceId, cancellationToken);
+        var semanticResults = await RetrieveSemanticAsync(question, sourceId, cancellationToken);
+
+        if (semanticResults.Count == 0)
+        {
+            return lexicalResults;
+        }
+
+        var merged = new Dictionary<string, RetrievedChunk>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var lexical in lexicalResults)
+        {
+            merged[lexical.Chunk.ChunkId] = new RetrievedChunk
+            {
+                Chunk = lexical.Chunk,
+                Score = lexical.Score * _options.LexicalWeight
+            };
+        }
+
+        foreach (var semantic in semanticResults)
+        {
+            if (merged.TryGetValue(semantic.Chunk.ChunkId, out var existing))
+            {
+                merged[semantic.Chunk.ChunkId] = new RetrievedChunk
+                {
+                    Chunk = existing.Chunk,
+                    Score = existing.Score + (semantic.Score * _options.SemanticWeight)
+                };
+
+                continue;
+            }
+
+            merged[semantic.Chunk.ChunkId] = new RetrievedChunk
+            {
+                Chunk = semantic.Chunk,
+                Score = semantic.Score * _options.SemanticWeight
+            };
+        }
+
+        var mergedResults = merged.Values
+            .Where(result => result.Score >= _options.MinimumScore)
+            .OrderByDescending(result => result.Score)
+            .ThenBy(result => result.Chunk.SourceName, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        var candidateCount = Math.Max(_options.MaxRetrievedChunks, _options.Reranker.CandidateCount);
+        var candidates = mergedResults.Take(candidateCount).ToArray();
+
+        var reranked = _reranker.IsConfigured
+            ? await _reranker.RerankAsync(question, candidates, cancellationToken)
+            : candidates;
+
+        var response = reranked
+            .OrderByDescending(result => result.Score)
+            .ThenBy(result => result.Chunk.SourceName, StringComparer.OrdinalIgnoreCase)
+            .Take(_options.MaxRetrievedChunks)
+            .ToArray();
+
+        _appTelemetry.TrackRetrieval(stopwatch.Elapsed);
+        return response;
+    }
+
+    private async Task<IReadOnlyList<RetrievedChunk>> RetrieveLexicalAsync(string question, string? sourceId, CancellationToken cancellationToken)
+    {
+        var allowedSources = _sourceAccessService.GetAllowedSources();
+        var questionTokens = Tokenize(question);
+        var chunks = await _documentStore.GetChunksAsync(cancellationToken);
+
+        return chunks
+            .Where(chunk => IsAccessibleSource(chunk.SourceId, sourceId, allowedSources))
+            .Select(chunk => new RetrievedChunk
+            {
+                Chunk = chunk,
+                Score = ScoreChunk(chunk.Content, question, questionTokens)
+            })
+            .Where(result => result.Score >= _options.MinimumScore)
+            .OrderByDescending(result => result.Score)
+            .ThenBy(result => result.Chunk.SourceName, StringComparer.OrdinalIgnoreCase)
+            .Take(_options.MaxRetrievedChunks)
+            .ToArray();
+    }
+
+    private async Task<IReadOnlyList<RetrievedChunk>> RetrieveSemanticAsync(string question, string? sourceId, CancellationToken cancellationToken)
+    {
+        if (!_embeddingClient.IsConfigured || !_vectorStore.IsConfigured)
+        {
+            return [];
+        }
+
+        var embedding = await _embeddingClient.GenerateEmbeddingAsync(question, cancellationToken);
+        if (embedding is null || embedding.Length == 0)
+        {
+            return [];
+        }
+
+        var allowedSources = _sourceAccessService.GetAllowedSources();
+        return (await _vectorStore.SearchAsync(embedding, sourceId, _options.MaxRetrievedChunks, cancellationToken))
+            .Where(result => IsAccessibleSource(result.Chunk.SourceId, sourceId, allowedSources))
+            .ToArray();
+    }
+
+    private static bool IsAccessibleSource(string chunkSourceId, string? requestedSourceId, IReadOnlySet<string>? allowedSources)
+    {
+        if (!string.IsNullOrWhiteSpace(requestedSourceId) && !string.Equals(chunkSourceId, requestedSourceId, StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        return allowedSources is null || allowedSources.Contains(chunkSourceId);
+    }
+
+    private static double ScoreChunk(string content, string question, HashSet<string> questionTokens)
+    {
+        if (questionTokens.Count == 0 || string.IsNullOrWhiteSpace(content))
+        {
+            return 0;
+        }
+
+        var contentTokens = Tokenize(content);
+        if (contentTokens.Count == 0)
+        {
+            return 0;
+        }
+
+        var overlap = questionTokens.Count(token => contentTokens.Contains(token));
+        var tokenScore = overlap / (double)questionTokens.Count;
+
+        var phraseBonus = content.Contains(question, StringComparison.OrdinalIgnoreCase) ? 0.35 : 0;
+        var startsWithBonus = questionTokens.Any(token => content.StartsWith(token, StringComparison.OrdinalIgnoreCase)) ? 0.05 : 0;
+        var densityBonus = overlap / (double)Math.Max(12, Math.Min(80, contentTokens.Count));
+
+        return Math.Min(1, tokenScore + phraseBonus + startsWithBonus + densityBonus);
+    }
+
+    private static HashSet<string> Tokenize(string value)
+    {
+        return TokenRegex
+            .Matches(value.ToLowerInvariant())
+            .Select(match => match.Value)
+            .Where(token => token.Length > 1)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+    }
+}

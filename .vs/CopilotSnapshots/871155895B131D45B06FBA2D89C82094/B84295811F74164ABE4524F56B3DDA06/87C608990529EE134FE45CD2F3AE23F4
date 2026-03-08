@@ -1,0 +1,118 @@
+﻿using System.Collections.Concurrent;
+using System.Threading.Channels;
+using ChatbotRAGAPI.Contracts;
+using ChatbotRAGAPI.Domain;
+using ChatbotRAGAPI.Options;
+using ChatbotRAGAPI.Services.Interfaces;
+using Microsoft.Extensions.Options;
+
+namespace ChatbotRAGAPI.Services;
+
+public sealed class BackgroundIngestionQueue : IIngestionJobQueue
+{
+    private readonly Channel<BackgroundIngestionJob> _channel;
+    private readonly ConcurrentDictionary<string, BackgroundIngestionJob> _jobs = new(StringComparer.OrdinalIgnoreCase);
+
+    public BackgroundIngestionQueue(IOptions<RagOptions> options)
+    {
+        var capacity = Math.Max(1, options.Value.BackgroundIngestion.QueueCapacity);
+        _channel = Channel.CreateBounded<BackgroundIngestionJob>(new BoundedChannelOptions(capacity)
+        {
+            SingleReader = true,
+            SingleWriter = false,
+            FullMode = BoundedChannelFullMode.Wait
+        });
+    }
+
+    public async ValueTask<IngestionJobAcceptedResponse> EnqueueAsync(BackgroundIngestionJob job, CancellationToken cancellationToken)
+    {
+        job.JobId = string.IsNullOrWhiteSpace(job.JobId) ? $"job_{Guid.NewGuid():N}" : job.JobId;
+        job.State = IngestionJobState.Queued;
+        job.QueuedAtUtc = DateTimeOffset.UtcNow;
+        job.StartedAtUtc = null;
+        job.CompletedAtUtc = null;
+        job.Error = null;
+        job.Results = [];
+
+        _jobs[job.JobId] = job;
+        await _channel.Writer.WriteAsync(job, cancellationToken);
+
+        return new IngestionJobAcceptedResponse
+        {
+            JobId = job.JobId,
+            Status = job.State.ToString(),
+            QueuedAtUtc = job.QueuedAtUtc
+        };
+    }
+
+    public IAsyncEnumerable<BackgroundIngestionJob> ReadAllAsync(CancellationToken cancellationToken)
+    {
+        return _channel.Reader.ReadAllAsync(cancellationToken);
+    }
+
+    public Task MarkProcessingAsync(string jobId, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        if (_jobs.TryGetValue(jobId, out var job))
+        {
+            job.State = IngestionJobState.Processing;
+            job.StartedAtUtc = DateTimeOffset.UtcNow;
+            job.Error = null;
+        }
+
+        return Task.CompletedTask;
+    }
+
+    public Task MarkCompletedAsync(string jobId, IReadOnlyList<IngestionResponse> results, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        if (_jobs.TryGetValue(jobId, out var job))
+        {
+            job.State = IngestionJobState.Completed;
+            job.CompletedAtUtc = DateTimeOffset.UtcNow;
+            job.Results = results;
+            job.Content = null;
+            job.Url = null;
+            job.Files = [];
+        }
+
+        return Task.CompletedTask;
+    }
+
+    public Task MarkFailedAsync(string jobId, string error, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        if (_jobs.TryGetValue(jobId, out var job))
+        {
+            job.State = IngestionJobState.Failed;
+            job.CompletedAtUtc = DateTimeOffset.UtcNow;
+            job.Error = error;
+            job.Content = null;
+            job.Url = null;
+            job.Files = [];
+        }
+
+        return Task.CompletedTask;
+    }
+
+    public ValueTask<IngestionJobStatusResponse?> GetStatusAsync(string jobId, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        if (!_jobs.TryGetValue(jobId, out var job))
+        {
+            return ValueTask.FromResult<IngestionJobStatusResponse?>(null);
+        }
+
+        return ValueTask.FromResult<IngestionJobStatusResponse?>(new IngestionJobStatusResponse
+        {
+            JobId = job.JobId,
+            Status = job.State.ToString(),
+            SourceType = job.SourceType,
+            QueuedAtUtc = job.QueuedAtUtc,
+            StartedAtUtc = job.StartedAtUtc,
+            CompletedAtUtc = job.CompletedAtUtc,
+            Error = job.Error,
+            Results = job.Results
+        });
+    }
+}

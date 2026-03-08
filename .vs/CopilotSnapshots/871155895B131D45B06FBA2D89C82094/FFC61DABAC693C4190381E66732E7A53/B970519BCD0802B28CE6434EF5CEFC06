@@ -1,0 +1,40 @@
+﻿using ChatbotRAGAPI.Options;
+using ChatbotRAGAPI.Services;
+using ChatbotRAGAPI.Services.Interfaces;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<RagOptions>(builder.Configuration.GetSection(RagOptions.SectionName));
+builder.Services.AddControllers();
+builder.Services.AddOpenApi();
+
+builder.Services.AddSingleton<IDocumentStore, InMemoryDocumentStore>();
+builder.Services.AddSingleton<ITextChunker, TextChunker>();
+builder.Services.AddScoped<IIngestionService, IngestionService>();
+builder.Services.AddScoped<IRetrievalService, RetrievalService>();
+builder.Services.AddScoped<IChatService, GroundedChatService>();
+builder.Services.AddHttpClient<IEmbeddingClient, OpenAiCompatibleEmbeddingClient>();
+builder.Services.AddHttpClient<ILlmClient, OpenAiCompatibleLlmClient>();
+builder.Services.AddHttpClient<IVectorStore, QdrantVectorStore>();
+builder.Services.AddHttpClient<IWebPageContentService, WebPageContentService>();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+
+app.UseHttpsRedirection();
+app.UseAuthorization();
+
+app.MapGet("/", () => Results.Ok(new
+{
+    service = "ChatbotRAGAPI",
+    mode = "strict-rag-hybrid",
+    status = "ready"
+}));
+
+app.MapControllers();
+
+app.Run();

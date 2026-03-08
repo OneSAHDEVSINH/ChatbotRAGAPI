@@ -1,0 +1,213 @@
+﻿using System.Net;
+using System.Text;
+using ChatbotRAGAPI.Services.Interfaces;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using HtmlAgilityPack;
+using UglyToad.PdfPig;
+using A = DocumentFormat.OpenXml.Drawing;
+using PresentationDocument = DocumentFormat.OpenXml.Packaging.PresentationDocument;
+using SpreadsheetDocument = DocumentFormat.OpenXml.Packaging.SpreadsheetDocument;
+using WordprocessingDocument = DocumentFormat.OpenXml.Packaging.WordprocessingDocument;
+
+namespace ChatbotRAGAPI.Services;
+
+public sealed class UploadedDocumentTextExtractor : IUploadedDocumentTextExtractor
+{
+    private static readonly HashSet<string> SupportedExtensions =
+    [
+        ".txt", ".md", ".json", ".csv", ".xml", ".yml", ".yaml", ".log", ".html", ".htm", ".cs", ".js", ".ts", ".sql",
+        ".pdf", ".docx", ".xlsx", ".pptx"
+    ];
+
+    public bool CanExtract(string fileName)
+    {
+        var extension = Path.GetExtension(fileName);
+        return SupportedExtensions.Contains(extension);
+    }
+
+    public async Task<string?> ExtractAsync(IFormFile file, CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(file);
+        cancellationToken.ThrowIfCancellationRequested();
+
+        var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+        return extension switch
+        {
+            ".pdf" => ExtractPdf(file),
+            ".docx" => ExtractDocx(file),
+            ".xlsx" => ExtractXlsx(file),
+            ".pptx" => ExtractPptx(file),
+            ".html" or ".htm" => await ExtractHtmlAsync(file, cancellationToken),
+            _ => await ExtractPlainTextAsync(file, cancellationToken)
+        };
+    }
+
+    private static string ExtractPdf(IFormFile file)
+    {
+        using var stream = file.OpenReadStream();
+        using var document = PdfDocument.Open(stream);
+
+        var pages = document.GetPages()
+            .Select(page => page.Text)
+            .Where(text => !string.IsNullOrWhiteSpace(text))
+            .Select(NormalizeWhitespace)
+            .ToArray();
+
+        return string.Join(Environment.NewLine + Environment.NewLine, pages);
+    }
+
+    private static string ExtractDocx(IFormFile file)
+    {
+        using var stream = file.OpenReadStream();
+        using var document = WordprocessingDocument.Open(stream, false);
+
+        var paragraphs = document.MainDocumentPart?
+            .Document?
+            .Body?
+            .Descendants<DocumentFormat.OpenXml.Wordprocessing.Paragraph>()
+            .Select(paragraph => NormalizeWhitespace(paragraph.InnerText))
+            .Where(text => !string.IsNullOrWhiteSpace(text))
+            .ToArray();
+
+        return paragraphs is { Length: > 0 }
+            ? string.Join(Environment.NewLine + Environment.NewLine, paragraphs)
+            : string.Empty;
+    }
+
+    private static string ExtractXlsx(IFormFile file)
+    {
+        using var stream = file.OpenReadStream();
+        using var document = SpreadsheetDocument.Open(stream, false);
+
+        var workbookPart = document.WorkbookPart;
+        if (workbookPart?.Workbook?.Sheets is null)
+        {
+            return string.Empty;
+        }
+
+        var sharedStrings = workbookPart.SharedStringTablePart?.SharedStringTable?
+            .Elements<SharedStringItem>()
+            .Select(item => item.InnerText)
+            .ToArray() ?? [];
+
+        var rows = new List<string>();
+        foreach (var sheet in workbookPart.Workbook.Sheets.Elements<Sheet>())
+        {
+            if (sheet.Id?.Value is null)
+            {
+                continue;
+            }
+
+            rows.Add($"Sheet: {sheet.Name?.Value ?? "Unnamed"}");
+            var worksheetPart = (WorksheetPart)workbookPart.GetPartById(sheet.Id.Value);
+            foreach (var row in worksheetPart.Worksheet.Descendants<Row>())
+            {
+                var values = row.Elements<Cell>()
+                    .Select(cell => GetCellValue(cell, sharedStrings))
+                    .Where(value => !string.IsNullOrWhiteSpace(value))
+                    .ToArray();
+
+                if (values.Length > 0)
+                {
+                    rows.Add(string.Join(" | ", values));
+                }
+            }
+        }
+
+        return string.Join(Environment.NewLine, rows);
+    }
+
+    private static string ExtractPptx(IFormFile file)
+    {
+        using var stream = file.OpenReadStream();
+        using var document = PresentationDocument.Open(stream, false);
+
+        var presentationPart = document.PresentationPart;
+        if (presentationPart?.Presentation?.SlideIdList is null)
+        {
+            return string.Empty;
+        }
+
+        var slides = new List<string>();
+        foreach (var slideId in presentationPart.Presentation.SlideIdList.Elements<DocumentFormat.OpenXml.Presentation.SlideId>())
+        {
+            if (slideId.RelationshipId?.Value is null)
+            {
+                continue;
+            }
+
+            var slidePart = (SlidePart)presentationPart.GetPartById(slideId.RelationshipId.Value);
+            var text = slidePart.Slide.Descendants<A.Text>()
+                .Select(item => NormalizeWhitespace(item.Text))
+                .Where(value => !string.IsNullOrWhiteSpace(value))
+                .ToArray();
+
+            if (text.Length > 0)
+            {
+                slides.Add(string.Join(Environment.NewLine, text));
+            }
+        }
+
+        return string.Join(Environment.NewLine + Environment.NewLine, slides);
+    }
+
+    private static async Task<string> ExtractPlainTextAsync(IFormFile file, CancellationToken cancellationToken)
+    {
+        await using var stream = file.OpenReadStream();
+        using var reader = new StreamReader(stream, Encoding.UTF8, true);
+        var content = await reader.ReadToEndAsync(cancellationToken);
+        return NormalizeWhitespace(content, preserveLineBreaks: true);
+    }
+
+    private static async Task<string> ExtractHtmlAsync(IFormFile file, CancellationToken cancellationToken)
+    {
+        var html = await ExtractPlainTextAsync(file, cancellationToken);
+        var document = new HtmlDocument();
+        document.LoadHtml(html);
+
+        var nodesToRemove = document.DocumentNode.SelectNodes("//script|//style|//noscript");
+        if (nodesToRemove is not null)
+        {
+            foreach (var node in nodesToRemove)
+            {
+                node.Remove();
+            }
+        }
+
+        return NormalizeWhitespace(WebUtility.HtmlDecode(document.DocumentNode.InnerText), preserveLineBreaks: true);
+    }
+
+    private static string GetCellValue(Cell cell, IReadOnlyList<string> sharedStrings)
+    {
+        if (cell.DataType?.Value == CellValues.SharedString && int.TryParse(cell.CellValue?.Text, out var sharedStringIndex) && sharedStringIndex >= 0 && sharedStringIndex < sharedStrings.Count)
+        {
+            return NormalizeWhitespace(sharedStrings[sharedStringIndex]);
+        }
+
+        if (cell.InlineString?.Text is not null)
+        {
+            return NormalizeWhitespace(cell.InlineString.Text.Text);
+        }
+
+        return NormalizeWhitespace(cell.CellValue?.Text ?? cell.InnerText);
+    }
+
+    private static string NormalizeWhitespace(string? value, bool preserveLineBreaks = false)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return string.Empty;
+        }
+
+        var normalizedLines = value
+            .Replace("\r\n", "\n")
+            .Split('\n', StringSplitOptions.TrimEntries)
+            .Select(line => string.Join(' ', line.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)))
+            .Where(line => !string.IsNullOrWhiteSpace(line));
+
+        return preserveLineBreaks
+            ? string.Join(Environment.NewLine, normalizedLines)
+            : string.Join(' ', normalizedLines);
+    }
+}

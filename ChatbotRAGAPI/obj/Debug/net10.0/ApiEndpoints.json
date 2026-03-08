@@ -1,0 +1,297 @@
+[
+  {
+    "ContainingType": "Program\u002B\u003C\u003Ec__DisplayClass0_0",
+    "Method": "\u003C\u003CMain\u003E$\u003Eb__2",
+    "RelativePath": "",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChatbotRAGAPI.Controllers.ChatController",
+    "Method": "AskAsync",
+    "RelativePath": "api/chat/ask",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ChatbotRAGAPI.Contracts.AskQuestionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ChatbotRAGAPI.Contracts.AskQuestionResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChatbotRAGAPI.Controllers.ChatController",
+    "Method": "StreamAsync",
+    "RelativePath": "api/chat/ask/stream",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ChatbotRAGAPI.Contracts.AskQuestionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChatbotRAGAPI.Controllers.DiagnosticsController",
+    "Method": "GetSummary",
+    "RelativePath": "api/diagnostics/summary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ChatbotRAGAPI.Contracts.DiagnosticsSummaryResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChatbotRAGAPI.Controllers.IngestionController",
+    "Method": "GetDocumentsAsync",
+    "RelativePath": "api/ingestion/documents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChatbotRAGAPI.Controllers.IngestionController",
+    "Method": "IngestFilesAsync",
+    "RelativePath": "api/ingestion/documents/files",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "files",
+        "Type": "Microsoft.AspNetCore.Http.IFormFileCollection",
+        "IsRequired": false
+      },
+      {
+        "Name": "sourceId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IReadOnlyList\u00601[[ChatbotRAGAPI.Contracts.IngestionResponse, ChatbotRAGAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChatbotRAGAPI.Controllers.IngestionController",
+    "Method": "IngestTextAsync",
+    "RelativePath": "api/ingestion/documents/text",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ChatbotRAGAPI.Contracts.IngestTextRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ChatbotRAGAPI.Contracts.IngestionResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChatbotRAGAPI.Controllers.IngestionController",
+    "Method": "GetIngestionJobStatusAsync",
+    "RelativePath": "api/ingestion/jobs/{jobId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jobId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ChatbotRAGAPI.Contracts.IngestionJobStatusResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChatbotRAGAPI.Controllers.IngestionController",
+    "Method": "EnqueueFileIngestionAsync",
+    "RelativePath": "api/ingestion/jobs/files",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "files",
+        "Type": "Microsoft.AspNetCore.Http.IFormFileCollection",
+        "IsRequired": false
+      },
+      {
+        "Name": "sourceId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ChatbotRAGAPI.Contracts.IngestionJobAcceptedResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 202
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChatbotRAGAPI.Controllers.IngestionController",
+    "Method": "EnqueueTextIngestionAsync",
+    "RelativePath": "api/ingestion/jobs/text",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ChatbotRAGAPI.Contracts.IngestTextRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ChatbotRAGAPI.Contracts.IngestionJobAcceptedResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 202
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChatbotRAGAPI.Controllers.IngestionController",
+    "Method": "EnqueueWebPageIngestionAsync",
+    "RelativePath": "api/ingestion/jobs/webpages",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ChatbotRAGAPI.Contracts.IngestWebPageRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ChatbotRAGAPI.Contracts.IngestionJobAcceptedResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 202
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChatbotRAGAPI.Controllers.IngestionController",
+    "Method": "IngestWebPageAsync",
+    "RelativePath": "api/ingestion/webpages",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ChatbotRAGAPI.Contracts.IngestWebPageRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ChatbotRAGAPI.Contracts.IngestionResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

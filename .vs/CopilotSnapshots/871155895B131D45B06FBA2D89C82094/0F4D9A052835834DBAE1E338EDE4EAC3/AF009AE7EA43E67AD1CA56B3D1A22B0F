@@ -1,0 +1,35 @@
+﻿using System.Net;
+using HtmlAgilityPack;
+using ChatbotRAGAPI.Services.Interfaces;
+
+namespace ChatbotRAGAPI.Services;
+
+public sealed class WebPageContentService : IWebPageContentService
+{
+    private readonly HttpClient _httpClient;
+
+    public WebPageContentService(HttpClient httpClient)
+    {
+        _httpClient = httpClient;
+    }
+
+    public async Task<(string Title, string Content)> FetchAsync(string url, CancellationToken cancellationToken)
+    {
+        var html = await _httpClient.GetStringAsync(url, cancellationToken);
+        var document = new HtmlDocument();
+        document.LoadHtml(html);
+
+        foreach (var node in document.DocumentNode.SelectNodes("//script|//style|//noscript") ?? [])
+        {
+            node.Remove();
+        }
+
+        var title = WebUtility.HtmlDecode(document.DocumentNode.SelectSingleNode("//title")?.InnerText?.Trim() ?? url);
+        var bodyText = WebUtility.HtmlDecode(document.DocumentNode.InnerText);
+        var normalized = string.Join("\n", bodyText
+            .Split('\n', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+            .Where(line => !string.IsNullOrWhiteSpace(line)));
+
+        return (title, normalized);
+    }
+}

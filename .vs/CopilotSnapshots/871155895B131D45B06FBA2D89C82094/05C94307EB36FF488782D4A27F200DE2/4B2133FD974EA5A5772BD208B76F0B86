@@ -1,0 +1,76 @@
+﻿using System.Text.RegularExpressions;
+using ChatbotRAGAPI.Domain;
+using ChatbotRAGAPI.Options;
+using ChatbotRAGAPI.Services.Interfaces;
+using Microsoft.Extensions.Options;
+
+namespace ChatbotRAGAPI.Services;
+
+public sealed class RetrievalService : IRetrievalService
+{
+    private static readonly Regex TokenRegex = new(@"\p{L}[\p{L}\p{Nd}_-]*", RegexOptions.Compiled);
+
+    private readonly IDocumentStore _documentStore;
+    private readonly RagOptions _options;
+
+    public RetrievalService(IDocumentStore documentStore, IOptions<RagOptions> options)
+    {
+        _documentStore = documentStore;
+        _options = options.Value;
+    }
+
+    public async Task<IReadOnlyList<RetrievedChunk>> RetrieveAsync(string question, string? sourceId, CancellationToken cancellationToken)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(question);
+
+        var questionTokens = Tokenize(question);
+        var chunks = await _documentStore.GetChunksAsync(cancellationToken);
+
+        var ranked = chunks
+            .Where(chunk => string.IsNullOrWhiteSpace(sourceId) || string.Equals(chunk.SourceId, sourceId, StringComparison.OrdinalIgnoreCase))
+            .Select(chunk => new RetrievedChunk
+            {
+                Chunk = chunk,
+                Score = ScoreChunk(chunk.Content, question, questionTokens)
+            })
+            .Where(result => result.Score >= _options.MinimumScore)
+            .OrderByDescending(result => result.Score)
+            .ThenBy(result => result.Chunk.SourceName, StringComparer.OrdinalIgnoreCase)
+            .Take(_options.MaxRetrievedChunks)
+            .ToArray();
+
+        return ranked;
+    }
+
+    private static double ScoreChunk(string content, string question, HashSet<string> questionTokens)
+    {
+        if (questionTokens.Count == 0 || string.IsNullOrWhiteSpace(content))
+        {
+            return 0;
+        }
+
+        var contentTokens = Tokenize(content);
+        if (contentTokens.Count == 0)
+        {
+            return 0;
+        }
+
+        var overlap = questionTokens.Count(token => contentTokens.Contains(token));
+        var tokenScore = overlap / (double)questionTokens.Count;
+
+        var phraseBonus = content.Contains(question, StringComparison.OrdinalIgnoreCase) ? 0.35 : 0;
+        var startsWithBonus = questionTokens.Any(token => content.StartsWith(token, StringComparison.OrdinalIgnoreCase)) ? 0.05 : 0;
+        var densityBonus = overlap / (double)Math.Max(12, Math.Min(80, contentTokens.Count));
+
+        return Math.Min(1, tokenScore + phraseBonus + startsWithBonus + densityBonus);
+    }
+
+    private static HashSet<string> Tokenize(string value)
+    {
+        return TokenRegex
+            .Matches(value.ToLowerInvariant())
+            .Select(match => match.Value)
+            .Where(token => token.Length > 1)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+    }
+}

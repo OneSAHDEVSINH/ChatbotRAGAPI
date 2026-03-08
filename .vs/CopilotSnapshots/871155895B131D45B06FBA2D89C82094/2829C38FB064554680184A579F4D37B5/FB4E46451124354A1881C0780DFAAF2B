@@ -1,0 +1,174 @@
+﻿namespace ChatbotRAGAPI.Options;
+
+public sealed class RagOptions
+{
+    public const string SectionName = "Rag";
+
+    public int ChunkSize { get; set; } = 1200;
+
+    public int ChunkOverlap { get; set; } = 150;
+
+    public int MaxRetrievedChunks { get; set; } = 6;
+
+    public double MinimumScore { get; set; } = 0.18;
+
+    public double LexicalWeight { get; set; } = 0.35;
+
+    public double SemanticWeight { get; set; } = 0.65;
+
+    public bool UseConfiguredLlm { get; set; } = true;
+
+    public BackgroundIngestionOptions BackgroundIngestion { get; set; } = new();
+
+    public SecurityOptions Security { get; set; } = new();
+
+    public EmbeddingsOptions Embeddings { get; set; } = new();
+
+    public OcrOptions Ocr { get; set; } = new();
+
+    public RerankerOptions Reranker { get; set; } = new();
+
+    public VectorStoreOptions VectorStore { get; set; } = new();
+
+    public PostgresOptions Postgres { get; set; } = new();
+
+    public LlmOptions Llm { get; set; } = new();
+}
+
+public sealed class EmbeddingsOptions
+{
+    public string? BaseUrl { get; set; }
+
+    public string EmbeddingsPath { get; set; } = "/v1/embeddings";
+
+    public string? Model { get; set; }
+
+    public string? ApiKey { get; set; }
+
+    public int Dimensions { get; set; } = 1024;
+
+    public bool IsConfigured =>
+        !string.IsNullOrWhiteSpace(BaseUrl) &&
+        !string.IsNullOrWhiteSpace(Model) &&
+        Dimensions > 0;
+}
+
+public sealed class BackgroundIngestionOptions
+{
+    public int QueueCapacity { get; set; } = 100;
+
+    public int MaxFilesPerJob { get; set; } = 10;
+
+    public long MaxBufferedFileBytes { get; set; } = 25 * 1024 * 1024;
+}
+
+public sealed class SecurityOptions
+{
+    public bool Enabled { get; set; }
+
+    public string HeaderName { get; set; } = "X-Api-Key";
+
+    public ApiKeyConfiguration[] ApiKeys { get; set; } = [];
+}
+
+public sealed class ApiKeyConfiguration
+{
+    public string Name { get; set; } = string.Empty;
+
+    public string Key { get; set; } = string.Empty;
+
+    public string[] AllowedSources { get; set; } = [];
+}
+
+public sealed class OcrOptions
+{
+    public bool Enabled { get; set; }
+
+    public string ExecutablePath { get; set; } = "tesseract";
+
+    public string Language { get; set; } = "eng";
+
+    public int PageSegmentationMode { get; set; } = 3;
+
+    public int TimeoutSeconds { get; set; } = 120;
+
+    public string? DataPath { get; set; }
+
+    public string? TempDirectory { get; set; }
+
+    public bool IsConfigured =>
+        Enabled &&
+        !string.IsNullOrWhiteSpace(ExecutablePath) &&
+        !string.IsNullOrWhiteSpace(Language) &&
+        TimeoutSeconds > 0;
+}
+
+public sealed class VectorStoreOptions
+{
+    public string? BaseUrl { get; set; }
+
+    public string CollectionName { get; set; } = "chatbot_chunks";
+
+    public string Distance { get; set; } = "Cosine";
+
+    public string? ApiKey { get; set; }
+
+    public double MinimumScore { get; set; } = 0.3;
+
+    public bool IsConfigured =>
+        !string.IsNullOrWhiteSpace(BaseUrl) &&
+        !string.IsNullOrWhiteSpace(CollectionName);
+}
+
+public sealed class PostgresOptions
+{
+    public string? ConnectionString { get; set; }
+
+    public string Schema { get; set; } = "public";
+
+    public string DocumentsTableName { get; set; } = "rag_documents";
+
+    public string ChunksTableName { get; set; } = "rag_chunks";
+
+    public bool IsConfigured => !string.IsNullOrWhiteSpace(ConnectionString);
+}
+
+public sealed class RerankerOptions
+{
+    public string? BaseUrl { get; set; }
+
+    public string RerankPath { get; set; } = "/rerank";
+
+    public string? Model { get; set; }
+
+    public string? ApiKey { get; set; }
+
+    public int CandidateCount { get; set; } = 12;
+
+    public int TopK { get; set; } = 6;
+
+    public double Weight { get; set; } = 0.75;
+
+    public bool IsConfigured =>
+        !string.IsNullOrWhiteSpace(BaseUrl) &&
+        !string.IsNullOrWhiteSpace(Model);
+}
+
+public sealed class LlmOptions
+{
+    public string? BaseUrl { get; set; }
+
+    public string ChatCompletionsPath { get; set; } = "/v1/chat/completions";
+
+    public string? Model { get; set; }
+
+    public string? ApiKey { get; set; }
+
+    public int MaxTokens { get; set; } = 400;
+
+    public double Temperature { get; set; } = 0.0;
+
+    public bool IsConfigured =>
+        !string.IsNullOrWhiteSpace(BaseUrl) &&
+        !string.IsNullOrWhiteSpace(Model);
+}

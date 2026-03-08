@@ -1,0 +1,122 @@
+using ChatbotRAGAPI.Options;
+using ChatbotRAGAPI.Services;
+using ChatbotRAGAPI.Services.HealthChecks;
+using ChatbotRAGAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Npgsql;
+
+var builder = WebApplication.CreateBuilder(args);
+var configuredRagOptions = builder.Configuration.GetSection(RagOptions.SectionName).Get<RagOptions>() ?? new RagOptions();
+
+builder.Services.Configure<RagOptions>(builder.Configuration.GetSection(RagOptions.SectionName));
+builder.Services.AddControllers();
+builder.Services.AddOpenApi();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<IAppTelemetry, AppTelemetry>();
+builder.Services.AddSingleton<ISourceAccessService, SourceAccessService>();
+builder.Services.AddAuthorization();
+builder.Services.AddHealthChecks()
+    .AddCheck<PostgresDependencyHealthCheck>("postgres")
+    .AddTypeActivatedCheck<ConfiguredHttpDependencyHealthCheck>("qdrant", args: new object?[] { "Qdrant", BuildDependencyUrl(configuredRagOptions.VectorStore.BaseUrl, "/collections") })
+    .AddTypeActivatedCheck<ConfiguredHttpDependencyHealthCheck>("llm", args: new object?[] { "LLM", BuildDependencyUrl(configuredRagOptions.Llm.BaseUrl) })
+    .AddTypeActivatedCheck<ConfiguredHttpDependencyHealthCheck>("embeddings", args: new object?[] { "Embeddings", BuildDependencyUrl(configuredRagOptions.Embeddings.BaseUrl) })
+    .AddTypeActivatedCheck<ConfiguredHttpDependencyHealthCheck>("reranker", args: new object?[] { "Reranker", BuildDependencyUrl(configuredRagOptions.Reranker.BaseUrl) });
+
+if (configuredRagOptions.Security.Enabled)
+{
+    builder.Services
+        .AddAuthentication(ApiKeyAuthenticationHandler.SchemeName)
+        .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>(ApiKeyAuthenticationHandler.SchemeName, _ => { });
+}
+
+if (configuredRagOptions.Postgres.IsConfigured)
+{
+    builder.Services.AddSingleton(new NpgsqlDataSourceBuilder(configuredRagOptions.Postgres.ConnectionString!).Build());
+    builder.Services.AddSingleton<IDocumentStore, PostgresDocumentStore>();
+    builder.Services.AddSingleton<IIngestionJobStore, PostgresIngestionJobStore>();
+}
+else
+{
+    builder.Services.AddSingleton<IDocumentStore, InMemoryDocumentStore>();
+    builder.Services.AddSingleton<IIngestionJobStore, InMemoryIngestionJobStore>();
+}
+
+builder.Services.AddSingleton<ITextChunker, TextChunker>();
+builder.Services.AddSingleton<IIngestionJobQueue, BackgroundIngestionQueue>();
+builder.Services.AddSingleton<IOcrTextExtractor, TesseractCliOcrTextExtractor>();
+builder.Services.AddSingleton<IUploadedDocumentTextExtractor, UploadedDocumentTextExtractor>();
+builder.Services.AddHostedService<BackgroundIngestionWorker>();
+builder.Services.AddScoped<IIngestionService, IngestionService>();
+builder.Services.AddScoped<IRetrievalService, RetrievalService>();
+builder.Services.AddScoped<IChatService, GroundedChatService>();
+builder.Services.AddHttpClient<IEmbeddingClient, OpenAiCompatibleEmbeddingClient>();
+builder.Services.AddHttpClient<ILlmClient, OpenAiCompatibleLlmClient>();
+builder.Services.AddHttpClient<IReranker, OpenSourceRerankerClient>();
+builder.Services.AddHttpClient<IVectorStore, QdrantVectorStore>();
+builder.Services.AddHttpClient<IWebPageContentService, WebPageContentService>();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+
+app.UseHttpsRedirection();
+
+if (configuredRagOptions.Security.Enabled)
+{
+    app.UseAuthentication();
+    app.Use(async (context, next) =>
+    {
+        var authenticationResult = await context.AuthenticateAsync(ApiKeyAuthenticationHandler.SchemeName);
+        if (!authenticationResult.Succeeded || authenticationResult.Principal is null)
+        {
+            await context.ChallengeAsync(ApiKeyAuthenticationHandler.SchemeName);
+            return;
+        }
+
+        context.User = authenticationResult.Principal;
+        await next();
+    });
+}
+
+app.UseAuthorization();
+
+app.MapGet("/", () => Results.Ok(new
+{
+    service = "ChatbotRAGAPI",
+    mode = "strict-rag-hybrid",
+    fileIngestion = "pdf-docx-xlsx-pptx-image-web-text",
+    backgroundIngestion = "enabled",
+    backgroundIngestionDurability = configuredRagOptions.Postgres.IsConfigured ? "postgresql" : "in-memory",
+    diagnostics = "/api/diagnostics/summary",
+    liveness = "/health/live",
+    readiness = "/health/ready",
+    security = configuredRagOptions.Security.Enabled ? "api-key" : "disabled",
+    metadataStore = configuredRagOptions.Postgres.IsConfigured ? "postgresql" : "in-memory",
+    status = "ready"
+}));
+
+app.MapHealthChecks("/health/live", new HealthCheckOptions
+{
+    Predicate = _ => false
+});
+
+app.MapHealthChecks("/health/ready");
+app.MapControllers();
+
+app.Run();
+
+static string? BuildDependencyUrl(string? baseUrl, string? relativePath = null)
+{
+    if (string.IsNullOrWhiteSpace(baseUrl) || !Uri.TryCreate(baseUrl, UriKind.Absolute, out var uri))
+    {
+        return null;
+    }
+
+    return string.IsNullOrWhiteSpace(relativePath)
+        ? uri.ToString()
+        : new Uri(uri, relativePath).ToString();
+}

@@ -1,0 +1,131 @@
+using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using ChatbotRAGAPI.Domain;
+using ChatbotRAGAPI.Options;
+using ChatbotRAGAPI.Services.Interfaces;
+using Microsoft.Extensions.Options;
+
+namespace ChatbotRAGAPI.Services;
+
+public sealed class OpenSourceRerankerClient : IReranker
+{
+    private static readonly JsonSerializerOptions SerializerOptions = new(JsonSerializerDefaults.Web)
+    {
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+    };
+
+    private readonly HttpClient _httpClient;
+    private readonly RagOptions _options;
+
+    public OpenSourceRerankerClient(HttpClient httpClient, IOptions<RagOptions> options)
+    {
+        _httpClient = httpClient;
+        _options = options.Value;
+    }
+
+    public bool IsConfigured => _options.Reranker.IsConfigured;
+
+    public async Task<IReadOnlyList<RetrievedChunk>> RerankAsync(string query, IReadOnlyList<RetrievedChunk> candidates, CancellationToken cancellationToken)
+    {
+        if (!IsConfigured || candidates.Count == 0)
+        {
+            return candidates;
+        }
+
+        try
+        {
+            var payload = await RetryHelper.ExecuteAsync(async token =>
+            {
+                using var message = new HttpRequestMessage(HttpMethod.Post, BuildRequestUri());
+                if (!string.IsNullOrWhiteSpace(_options.Reranker.ApiKey))
+                {
+                    message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _options.Reranker.ApiKey);
+                }
+
+                var request = new RerankRequest
+                {
+                    Model = _options.Reranker.Model!,
+                    Query = query,
+                    Documents = candidates.Select(candidate => candidate.Chunk.Content).ToArray(),
+                    TopN = Math.Min(_options.Reranker.TopK, candidates.Count)
+                };
+
+                message.Content = new StringContent(JsonSerializer.Serialize(request, SerializerOptions), Encoding.UTF8, "application/json");
+                using var response = await _httpClient.SendAsync(message, token);
+                response.EnsureSuccessStatusCode();
+
+                await using var stream = await response.Content.ReadAsStreamAsync(token);
+                return await JsonSerializer.DeserializeAsync<RerankResponse>(stream, SerializerOptions, token);
+            }, _options.Resilience, cancellationToken);
+
+            if (payload?.Data is null || payload.Data.Count == 0)
+            {
+                return candidates;
+            }
+
+            var candidateLookup = candidates
+                .Select((candidate, index) => new { candidate, index })
+                .ToDictionary(item => item.index, item => item.candidate);
+
+            var reranked = payload.Data
+                .Where(item => candidateLookup.ContainsKey(item.Index))
+                .Select(item =>
+                {
+                    var candidate = candidateLookup[item.Index];
+                    return new RetrievedChunk
+                    {
+                        Chunk = candidate.Chunk,
+                        Score = Math.Min(1, (candidate.Score * (1 - _options.Reranker.Weight)) + (item.RelevanceScore * _options.Reranker.Weight))
+                    };
+                })
+                .OrderByDescending(item => item.Score)
+                .ToArray();
+
+            return reranked.Length == 0 ? candidates : reranked;
+        }
+        catch
+        {
+            return candidates;
+        }
+    }
+
+    private Uri BuildRequestUri()
+    {
+        var baseUrl = _options.Reranker.BaseUrl!;
+        return Uri.TryCreate(baseUrl, UriKind.Absolute, out var absolute)
+            ? new Uri(absolute, _options.Reranker.RerankPath)
+            : throw new InvalidOperationException("Rag:Reranker:BaseUrl must be an absolute URL.");
+    }
+
+    private sealed class RerankRequest
+    {
+        [JsonPropertyName("model")]
+        public string Model { get; set; } = string.Empty;
+
+        [JsonPropertyName("query")]
+        public string Query { get; set; } = string.Empty;
+
+        [JsonPropertyName("documents")]
+        public IReadOnlyList<string> Documents { get; set; } = [];
+
+        [JsonPropertyName("top_n")]
+        public int TopN { get; set; }
+    }
+
+    private sealed class RerankResponse
+    {
+        [JsonPropertyName("data")]
+        public List<RerankResult>? Data { get; set; }
+    }
+
+    private sealed class RerankResult
+    {
+        [JsonPropertyName("index")]
+        public int Index { get; set; }
+
+        [JsonPropertyName("relevance_score")]
+        public double RelevanceScore { get; set; }
+    }
+}

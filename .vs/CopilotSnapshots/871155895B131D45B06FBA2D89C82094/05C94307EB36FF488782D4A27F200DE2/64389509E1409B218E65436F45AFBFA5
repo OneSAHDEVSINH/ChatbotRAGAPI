@@ -1,0 +1,24 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "Rag": {
+    "ChunkSize": 1200,
+    "ChunkOverlap": 150,
+    "MaxRetrievedChunks": 6,
+    "MinimumScore": 0.18,
+    "UseConfiguredLlm": false,
+    "Llm": {
+      "BaseUrl": "http://localhost:8000",
+      "ChatCompletionsPath": "/v1/chat/completions",
+      "Model": "Qwen/Qwen2.5-7B-Instruct",
+      "ApiKey": null,
+      "MaxTokens": 400,
+      "Temperature": 0.0
+    }
+  }
+}

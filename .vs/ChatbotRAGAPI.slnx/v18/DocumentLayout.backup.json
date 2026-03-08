@@ -1,0 +1,1006 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Chatbot\\ChatbotRAGAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\retryhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\retryhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\uploadeddocumenttextextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\uploadeddocumenttextextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\chatbotragapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\chatbotragapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\groundedchatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\groundedchatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\options\\ragoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\options\\ragoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\domain\\storeddocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\domain\\storeddocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\contracts\\ingestionresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\contracts\\ingestionresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\contracts\\askquestionresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\contracts\\askquestionresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\contracts\\ingesttextrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\contracts\\ingesttextrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\contracts\\ingestwebpagerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\contracts\\ingestwebpagerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\contracts\\askquestionrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\contracts\\askquestionrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\itextchunker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\itextchunker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\illmclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\illmclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\idocumentstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\idocumentstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\iingestionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\iingestionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\iretrievalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\iretrievalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\iwebpagecontentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\iwebpagecontentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\ichatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\ichatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\inmemorydocumentstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\inmemorydocumentstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\textchunker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\textchunker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\retrievalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\retrievalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\ingestionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\ingestionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\webpagecontentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\webpagecontentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\openaicompatiblellmclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\openaicompatiblellmclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\controllers\\ingestioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\controllers\\ingestioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\openaicompatibleembeddingclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\openaicompatibleembeddingclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\qdrantvectorstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\qdrantvectorstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\iembeddingclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\iembeddingclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\ivectorstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\ivectorstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\ireranker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\ireranker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\opensourcererankerclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\opensourcererankerclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\iuploadeddocumenttextextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\iuploadeddocumenttextextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\tesseractcliocrtextextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\tesseractcliocrtextextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\iocrtextextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\iocrtextextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\postgresdocumentstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\postgresdocumentstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\backgroundingestionqueue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\backgroundingestionqueue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\domain\\backgroundingestionjob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\domain\\backgroundingestionjob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\contracts\\ingestionjobacceptedresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\contracts\\ingestionjobacceptedresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\backgroundingestionworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\backgroundingestionworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\iingestionjobqueue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\iingestionjobqueue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\contracts\\ingestionjobstatusresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\contracts\\ingestionjobstatusresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\contracts\\chatstreamevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\contracts\\chatstreamevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\apikeyauthenticationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\apikeyauthenticationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\isourceaccessservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\isourceaccessservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\sourceaccessservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\sourceaccessservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\inmemoryingestionjobstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\inmemoryingestionjobstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\iingestionjobstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\iingestionjobstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\postgresingestionjobstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\postgresingestionjobstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\apptelemetry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\apptelemetry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\healthchecks\\postgresdependencyhealthcheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\healthchecks\\postgresdependencyhealthcheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\healthchecks\\configuredhttpdependencyhealthcheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\healthchecks\\configuredhttpdependencyhealthcheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\controllers\\diagnosticscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\controllers\\diagnosticscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\contracts\\diagnosticssummaryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\contracts\\diagnosticssummaryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|d:\\chatbot\\chatbotragapi\\chatbotragapi\\services\\interfaces\\iapptelemetry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21FE89D3-018E-4B18-9EA9-D015D606556C}|ChatbotRAGAPI\\ChatbotRAGAPI.csproj|solutionrelative:chatbotragapi\\services\\interfaces\\iapptelemetry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\appsettings.Development.json",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\appsettings.Development.json",
+              "RelativeToolTip": "ChatbotRAGAPI\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-08T14:32:12.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UploadedDocumentTextExtractor.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\UploadedDocumentTextExtractor.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\UploadedDocumentTextExtractor.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\UploadedDocumentTextExtractor.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\UploadedDocumentTextExtractor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:17:53.44Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\appsettings.json",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\appsettings.json",
+              "RelativeToolTip": "ChatbotRAGAPI\\appsettings.json",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-08T12:01:39.175Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Program.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Program.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Program.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAHoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:00:56.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RetryHelper.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\RetryHelper.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\RetryHelper.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\RetryHelper.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\RetryHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T13:17:32.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ChatbotRAGAPI",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\ChatbotRAGAPI.csproj",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\ChatbotRAGAPI.csproj",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\ChatbotRAGAPI.csproj",
+              "RelativeToolTip": "ChatbotRAGAPI\\ChatbotRAGAPI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-03-08T12:00:56.893Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "TesseractCliOcrTextExtractor.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\TesseractCliOcrTextExtractor.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\TesseractCliOcrTextExtractor.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\TesseractCliOcrTextExtractor.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\TesseractCliOcrTextExtractor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:23:36.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "IAppTelemetry.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IAppTelemetry.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IAppTelemetry.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IAppTelemetry.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IAppTelemetry.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:59:04.894Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "DiagnosticsSummaryResponse.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\DiagnosticsSummaryResponse.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Contracts\\DiagnosticsSummaryResponse.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\DiagnosticsSummaryResponse.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Contracts\\DiagnosticsSummaryResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:59:04.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "DiagnosticsController.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Controllers\\DiagnosticsController.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Controllers\\DiagnosticsController.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Controllers\\DiagnosticsController.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Controllers\\DiagnosticsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:59:04.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "ConfiguredHttpDependencyHealthCheck.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\HealthChecks\\ConfiguredHttpDependencyHealthCheck.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\HealthChecks\\ConfiguredHttpDependencyHealthCheck.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\HealthChecks\\ConfiguredHttpDependencyHealthCheck.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\HealthChecks\\ConfiguredHttpDependencyHealthCheck.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:59:04.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "PostgresDependencyHealthCheck.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\HealthChecks\\PostgresDependencyHealthCheck.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\HealthChecks\\PostgresDependencyHealthCheck.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\HealthChecks\\PostgresDependencyHealthCheck.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\HealthChecks\\PostgresDependencyHealthCheck.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:59:04.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "AppTelemetry.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\AppTelemetry.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\AppTelemetry.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\AppTelemetry.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\AppTelemetry.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:59:04.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "PostgresIngestionJobStore.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\PostgresIngestionJobStore.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\PostgresIngestionJobStore.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\PostgresIngestionJobStore.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\PostgresIngestionJobStore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAANEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:52:09.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "IIngestionJobStore.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IIngestionJobStore.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IIngestionJobStore.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IIngestionJobStore.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IIngestionJobStore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:52:09.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "InMemoryIngestionJobStore.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\InMemoryIngestionJobStore.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\InMemoryIngestionJobStore.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\InMemoryIngestionJobStore.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\InMemoryIngestionJobStore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:52:09.242Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "SourceAccessService.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\SourceAccessService.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\SourceAccessService.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\SourceAccessService.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\SourceAccessService.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAABBwDsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:43:41.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "ISourceAccessService.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\ISourceAccessService.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\ISourceAccessService.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\ISourceAccessService.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\ISourceAccessService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:43:40.895Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "ApiKeyAuthenticationHandler.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\ApiKeyAuthenticationHandler.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\ApiKeyAuthenticationHandler.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\ApiKeyAuthenticationHandler.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\ApiKeyAuthenticationHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:43:40.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "ChatStreamEvent.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\ChatStreamEvent.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Contracts\\ChatStreamEvent.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\ChatStreamEvent.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Contracts\\ChatStreamEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:40:00.32Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "IngestionJobStatusResponse.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\IngestionJobStatusResponse.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Contracts\\IngestionJobStatusResponse.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\IngestionJobStatusResponse.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Contracts\\IngestionJobStatusResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:35:49.983Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "IIngestionJobQueue.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IIngestionJobQueue.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IIngestionJobQueue.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IIngestionJobQueue.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IIngestionJobQueue.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:35:49.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "BackgroundIngestionWorker.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\BackgroundIngestionWorker.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\BackgroundIngestionWorker.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\BackgroundIngestionWorker.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\BackgroundIngestionWorker.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAABBwGYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:35:49.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "IngestionJobAcceptedResponse.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\IngestionJobAcceptedResponse.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Contracts\\IngestionJobAcceptedResponse.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\IngestionJobAcceptedResponse.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Contracts\\IngestionJobAcceptedResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:35:49.686Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "BackgroundIngestionJob.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Domain\\BackgroundIngestionJob.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Domain\\BackgroundIngestionJob.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Domain\\BackgroundIngestionJob.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Domain\\BackgroundIngestionJob.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:35:49.451Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "BackgroundIngestionQueue.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\BackgroundIngestionQueue.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\BackgroundIngestionQueue.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\BackgroundIngestionQueue.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\BackgroundIngestionQueue.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwKIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:35:49.339Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "PostgresDocumentStore.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\PostgresDocumentStore.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\PostgresDocumentStore.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\PostgresDocumentStore.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\PostgresDocumentStore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:27:47.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "IOcrTextExtractor.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IOcrTextExtractor.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IOcrTextExtractor.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IOcrTextExtractor.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IOcrTextExtractor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:23:36.796Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GroundedChatService.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\GroundedChatService.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\GroundedChatService.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\GroundedChatService.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\GroundedChatService.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAApwOEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:00:16.815Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "IReranker.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IReranker.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IReranker.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IReranker.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IReranker.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:14:44.298Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "OpenSourceRerankerClient.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\OpenSourceRerankerClient.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\OpenSourceRerankerClient.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\OpenSourceRerankerClient.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\OpenSourceRerankerClient.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAIBJwIMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:14:55.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "IUploadedDocumentTextExtractor.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IUploadedDocumentTextExtractor.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IUploadedDocumentTextExtractor.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IUploadedDocumentTextExtractor.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IUploadedDocumentTextExtractor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:17:53.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "QdrantVectorStore.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\QdrantVectorStore.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\QdrantVectorStore.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\QdrantVectorStore.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\QdrantVectorStore.cs",
+              "ViewState": "AgIAAJsAAAAAAAAAAIBJwDoBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:08:03.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "OpenAiCompatibleEmbeddingClient.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\OpenAiCompatibleEmbeddingClient.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\OpenAiCompatibleEmbeddingClient.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\OpenAiCompatibleEmbeddingClient.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\OpenAiCompatibleEmbeddingClient.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAIBJwGwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:08:02.988Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "IVectorStore.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IVectorStore.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IVectorStore.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IVectorStore.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IVectorStore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:08:03.576Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "IEmbeddingClient.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IEmbeddingClient.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IEmbeddingClient.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IEmbeddingClient.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IEmbeddingClient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:08:03.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "IngestionService.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\IngestionService.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\IngestionService.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\IngestionService.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\IngestionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAABBwG4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:00:16.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "OpenAiCompatibleLlmClient.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\OpenAiCompatibleLlmClient.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\OpenAiCompatibleLlmClient.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\OpenAiCompatibleLlmClient.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\OpenAiCompatibleLlmClient.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAABBwOIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:00:17.1Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RagOptions.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Options\\RagOptions.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Options\\RagOptions.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Options\\RagOptions.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Options\\RagOptions.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAswL8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:58:39.919Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "TextChunker.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\TextChunker.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\TextChunker.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\TextChunker.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\TextChunker.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:59:17.961Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "IngestionController.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Controllers\\IngestionController.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Controllers\\IngestionController.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Controllers\\IngestionController.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Controllers\\IngestionController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAIBJwOYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:00:17.203Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "InMemoryDocumentStore.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\InMemoryDocumentStore.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\InMemoryDocumentStore.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\InMemoryDocumentStore.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\InMemoryDocumentStore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:59:17.88Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ChatController.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Controllers\\ChatController.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Controllers\\ChatController.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Controllers\\ChatController.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Controllers\\ChatController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAIBJwDcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:00:17.006Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "WebPageContentService.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\WebPageContentService.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\WebPageContentService.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\WebPageContentService.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\WebPageContentService.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAIBJwCsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:00:16.916Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "IWebPageContentService.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IWebPageContentService.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IWebPageContentService.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IWebPageContentService.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IWebPageContentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:59:17.709Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "RetrievalService.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\RetrievalService.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\RetrievalService.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\RetrievalService.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\RetrievalService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAABBwLQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T12:00:16.583Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IDocumentStore.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IDocumentStore.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IDocumentStore.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IDocumentStore.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IDocumentStore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:59:17.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AskQuestionRequest.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\AskQuestionRequest.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Contracts\\AskQuestionRequest.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\AskQuestionRequest.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Contracts\\AskQuestionRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:58:43.328Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "IChatService.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IChatService.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IChatService.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IChatService.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IChatService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAIBIwAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:59:17.795Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IngestWebPageRequest.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\IngestWebPageRequest.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Contracts\\IngestWebPageRequest.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\IngestWebPageRequest.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Contracts\\IngestWebPageRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:58:43.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IRetrievalService.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IRetrievalService.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IRetrievalService.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IRetrievalService.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IRetrievalService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:59:17.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IIngestionService.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IIngestionService.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\IIngestionService.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\IIngestionService.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\IIngestionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:59:17.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AskQuestionResponse.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\AskQuestionResponse.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Contracts\\AskQuestionResponse.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\AskQuestionResponse.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Contracts\\AskQuestionResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:58:43Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ILlmClient.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\ILlmClient.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\ILlmClient.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\ILlmClient.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\ILlmClient.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAIBIwAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:59:17.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ITextChunker.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\ITextChunker.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Services\\Interfaces\\ITextChunker.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Services\\Interfaces\\ITextChunker.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Services\\Interfaces\\ITextChunker.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:59:17.267Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IngestionResponse.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\IngestionResponse.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Contracts\\IngestionResponse.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\IngestionResponse.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Contracts\\IngestionResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:58:42.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "StoredDocument.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Domain\\StoredDocument.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Domain\\StoredDocument.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Domain\\StoredDocument.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Domain\\StoredDocument.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:58:42.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IngestTextRequest.cs",
+              "DocumentMoniker": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\IngestTextRequest.cs",
+              "RelativeDocumentMoniker": "ChatbotRAGAPI\\Contracts\\IngestTextRequest.cs",
+              "ToolTip": "D:\\Chatbot\\ChatbotRAGAPI\\ChatbotRAGAPI\\Contracts\\IngestTextRequest.cs",
+              "RelativeToolTip": "ChatbotRAGAPI\\Contracts\\IngestTextRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T11:58:43.1Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
